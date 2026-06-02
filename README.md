@@ -1,5 +1,21 @@
 # Handoff — Portfolio Thomas Bandieras
+Le minimum impactant :
+  
+Un bouton de téléchargement PDF bien mis en avant
+Un aperçu du CV directement dans la page (iframe/embed du PDF)
 
+  Ce qui ferait vraiment gagner des points :
+  
+Aperçu PDF inline — le recruteur/correcteur voit le CV sans quitter la page, c'est professionnel et fluide
+Bouton télécharger — gros, bien visible, avec le nom du fichier stylisé
+Compétences avec niveau — barres de progression ou étoiles pour chaque techno (ex : React ████░ Avancé)
+Langues avec niveau CECRL — tu as déjà B2/B1 mentionné dans les tags, le mettre en plus visuel
+Certifications / formations courtes — si tu as des badges (GitHub Student, etc.)
+Soft skills visuels — des icônes ou cards avec tes qualités
+
+  Ce que je te recommande concrètement :
+  Une section avec deux colonnes — à gauche l'aperçu du PDF (ou une image du CV), à droite un gros bouton download + quelques stats clés (langues, niveaux, disponibilité). C'est sobre, efficace, et montre que tu maîtrises 
+  la mise en page.
 ## Prompt à coller dans Claude Code
 
 > Recrée ce portfolio personnel à partir des fichiers de référence fournis dans ce dossier (`Portfolio.html`, `styles.css`, `script.js`). Ce sont des **maquettes de référence en HTML/CSS/JS vanilla** : reproduis-les **au pixel près** dans l'environnement de mon projet (voir ci-dessous), en réutilisant les conventions et la stack déjà en place. Si aucun environnement n'existe encore, initialise un projet **Vite + React + TypeScript** et implémente-les là. Respecte scrupuleusement les tokens de design, la typographie et les interactions décrits dans ce README.

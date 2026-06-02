@@ -166,3 +166,181 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft')  { lbIdx = (lbIdx - 1 + lbImages.length) % lbImages.length; lbShow(); }
   if (e.key === 'ArrowRight') { lbIdx = (lbIdx + 1) % lbImages.length; lbShow(); }
 });
+
+/* ---------- CV iframe fallback ---------- */
+const cvIframe = document.querySelector('.cv-iframe');
+const cvPreview = document.querySelector('.cv-preview');
+if (cvIframe && cvPreview) {
+  cvIframe.addEventListener('error', () => cvPreview.classList.add('no-pdf'));
+  if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+    cvPreview.classList.add('no-pdf');
+  }
+}
+
+/* ---------- Tilt 3D — project cards ---------- */
+document.querySelectorAll('.proj').forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    card.style.transition = 'transform .12s ease';
+  });
+  card.addEventListener('mousemove', e => {
+    const r  = card.getBoundingClientRect();
+    const x  = e.clientX - r.left;
+    const y  = e.clientY - r.top;
+    const cx = r.width  / 2;
+    const cy = r.height / 2;
+    const rotY =  ((x - cx) / cx) * 9;
+    const rotX = -((y - cy) / cy) * 5;
+    card.style.transform = `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale(1.015)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transition = 'transform .55s cubic-bezier(.2,.8,.2,1)';
+    card.style.transform  = '';
+  });
+});
+
+/* ---------- Terminal interactif ---------- */
+(function () {
+  const input  = document.getElementById('termInput');
+  const output = document.getElementById('termOutput');
+  const body   = document.getElementById('termBody');
+  const win    = document.querySelector('.term-window');
+  if (!input) return;
+
+  const history = [];
+  let histIdx = -1;
+
+  /* ---- Commandes ---- */
+  const cmds = {
+    help() {
+      return `
+<span class="tc-comment">┌─ Commandes disponibles ─────────────────────────────┐</span>
+  <span class="tc-cmd">whoami</span>          — Qui suis-je ?
+  <span class="tc-cmd">ls</span>              — Fichiers disponibles
+  <span class="tc-cmd">ls projects/</span>    — Mes projets
+  <span class="tc-cmd">cat about.txt</span>   — À propos de moi
+  <span class="tc-cmd">cat contact.txt</span> — Mes coordonnées
+  <span class="tc-cmd">cat skills.txt</span>  — Compétences complètes
+  <span class="tc-cmd">github</span>          — Ouvrir mon GitHub ↗
+  <span class="tc-cmd">date</span>            — Date & heure
+  <span class="tc-cmd">clear</span>           — Vider le terminal
+  <span class="tc-cmd">echo &lt;texte&gt;</span>    — Répéter du texte
+<span class="tc-comment">└─────────────────────────────────────────────────────┘</span>`;
+    },
+    whoami() {
+      return `
+<span class="tc-key">Nom</span>          Thomas Bandieras
+<span class="tc-key">Rôle</span>         Développeur Full-Stack
+<span class="tc-key">Formation</span>    BUT Informatique · IUT Nice Côte d'Azur
+<span class="tc-key">Alternance</span>   Apprenti chez Thales · Nice, FR
+<span class="tc-key">GitHub</span>       github.com/Tiretinium
+<span class="tc-key">Dispo</span>        <span class="tc-green">● Disponible — Alternance 2026</span>`;
+    },
+    ls() {
+      return `about.txt  contact.txt  skills.txt  <span class="tc-dir">projects/</span>  cv.pdf`;
+    },
+    'ls projects/'() {
+      return `
+drwxr-xr-x  <span class="tc-dir">appmobile/</span>        Vue · TypeScript · REST API
+drwxr-xr-x  <span class="tc-dir">pokebattle/</span>       Spring Boot · React · MySQL
+drwxr-xr-x  <span class="tc-dir">escapecube2/</span>      Node.js · JavaScript · HTML/CSS
+drwxr-xr-x  <span class="tc-dir">aeroport-tycoon/</span>  React · TypeScript · Vite`;
+    },
+    'cat about.txt'() {
+      return `
+Étudiant en BUT Informatique, apprenti chez Thales.
+Du web full-stack à la conception de jeux — j'aime résoudre
+des problèmes concrets et livrer du code propre.
+
+<span class="tc-key">Localisation</span>  Nice — Côte d'Azur, FR
+<span class="tc-key">Langues</span>       Français (natif) · Anglais B2 · Italien B1`;
+    },
+    'cat contact.txt'() {
+      return `
+<span class="tc-key">Email</span>     thomasbanderas06@gmail.com
+<span class="tc-key">LinkedIn</span>  linkedin.com/in/thomas-bandieras-672772312
+<span class="tc-key">GitHub</span>    github.com/Tiretinium
+<span class="tc-key">Tél</span>       07 69 48 35 25`;
+    },
+    'cat skills.txt'() {
+      return `
+<span class="tc-key">Langages</span>    JavaScript · Java · Python · C · SQL · Bash
+<span class="tc-key">Frontend</span>    React · Vue.js · HTML/CSS
+<span class="tc-key">Backend</span>     Spring Boot · Express.js · Node.js
+<span class="tc-key">BDD</span>         MySQL · MariaDB · MongoDB · SQLite
+<span class="tc-key">DevOps</span>      Docker · Git · Linux · Maven
+<span class="tc-key">Langues</span>     Français (natif) · Anglais B2 · Italien B1`;
+    },
+    github() {
+      window.open('https://github.com/Tiretinium', '_blank');
+      return `Ouverture de github.com/Tiretinium... <span class="tc-green">✓</span>`;
+    },
+    date() {
+      return new Date().toLocaleString('fr-FR', { dateStyle: 'full', timeStyle: 'medium' });
+    },
+    clear: '__CLEAR__',
+  };
+
+  function esc(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function print(html, cls = '') {
+    const p = document.createElement('p');
+    p.className = 'term-line' + (cls ? ' ' + cls : '');
+    p.innerHTML = html;
+    output.appendChild(p);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function run(raw) {
+    const trimmed = raw.trim();
+    const lower   = trimmed.toLowerCase();
+
+    print(`<span class="term-prompt">thomas@portfolio:~$&nbsp;</span><span class="tc-input">${esc(raw)}</span>`);
+
+    if (!trimmed) return;
+
+    /* echo */
+    if (lower.startsWith('echo ')) {
+      print(esc(trimmed.slice(5)));
+      return;
+    }
+
+    /* clear */
+    if (lower === 'clear') { output.innerHTML = ''; return; }
+
+    const fn = cmds[lower];
+    if (fn && fn !== '__CLEAR__') {
+      const res = fn();
+      if (res) print(res);
+    } else {
+      print(`<span class="tc-err">bash: ${esc(trimmed)}: commande introuvable. Tape <strong>help</strong>.</span>`);
+    }
+  }
+
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      const val = input.value;
+      if (val.trim()) { history.unshift(val); histIdx = -1; }
+      run(val);
+      input.value = '';
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (histIdx < history.length - 1) histIdx++;
+      input.value = history[histIdx] ?? '';
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      histIdx = Math.max(-1, histIdx - 1);
+      input.value = histIdx === -1 ? '' : (history[histIdx] ?? '');
+    } else if (e.key === 'Tab') {
+      e.preventDefault();
+      /* Autocomplétion basique */
+      const partial = input.value.trim().toLowerCase();
+      const match   = Object.keys(cmds).find(k => k.startsWith(partial) && k !== partial);
+      if (match) input.value = match;
+    }
+  });
+
+  /* Clic sur la fenêtre → focus input */
+  win.addEventListener('click', () => input.focus());
+})();
