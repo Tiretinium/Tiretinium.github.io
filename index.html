@@ -38,7 +38,16 @@
 
 <!-- ============================ HERO ============================ -->
 <section id="hero" data-screen-label="Hero">
-  <div class="hero-star" aria-hidden="true"></div>
+  <div class="hero-react" aria-hidden="true">
+    <svg viewBox="-11.5 -10.23174 23 20.46348" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="0" cy="0" r="2.05" fill="#61DAFB"/>
+      <g stroke="#61DAFB" stroke-width="1" fill="none">
+        <ellipse rx="11" ry="4.2"/>
+        <ellipse rx="11" ry="4.2" transform="rotate(60)"/>
+        <ellipse rx="11" ry="4.2" transform="rotate(120)"/>
+      </g>
+    </svg>
+  </div>
   <div class="hero-inner">
     <div class="hero-top">
       <span class="sticker"><span class="dot"></span>Disponible · Alternance 2026</span>
@@ -69,7 +78,7 @@
     <span>React · Vue</span><span class="star">✳</span>
     <span>Game Dev</span><span class="star">✳</span>
     <span>Bases de données</span><span class="star">✳</span>
-    <span>Apprenti @ Thales</span><span class="star">✳</span>
+    <span>DevOps</span><span class="star">✳</span>
   </div>
 </div>
 
@@ -79,9 +88,9 @@
     <div class="kicker"><span class="idx">01</span> À propos</div>
     <div class="about-grid">
 
-      <div class="about-photo reveal">
-        <image-slot id="portrait" shape="rect" placeholder="Glisse ta photo ici" fit="cover"></image-slot>
-        <span class="photo-tag">Nice, FR · 2026</span>
+       <div class="about-photo reveal" style="display: flex; flex-direction: column; height: 100%;">
+        <image-slot id="portrait" shape="rect" src="/imageAmettredanslehtml/phtoThomas.jpg" placeholder="" fit="cover" style="height: 100%; min-height: 450px; width: 100%; object-fit: cover;"></image-slot>
+        <span class="photo-tag" style="margin-top: auto;">Nice, FR · 2026</span>
       </div>
 
       <div class="reveal">
@@ -189,7 +198,7 @@
         </div>
         <div class="proj-body">
           <div class="proj-num">02</div>
-          <h3 class="proj-title">Pokémon App — <em>Full Stack</em></h3>
+          <h3 class="proj-title">Pokémon<em> Battle</em></h3>
           <p class="proj-desc">Application web complète autour de l'univers Pokémon. Backend REST avec base de données, frontend interactif et authentification utilisateur.</p>
           <div class="proj-tech">
             <span class="chip"><img src="https://cdn.simpleicons.org/springboot/121212" alt="">Spring Boot</span>
@@ -320,23 +329,12 @@
       <div class="tl-item reveal">
         <div class="tl-dot"></div>
         <div class="tl-date">Sept. 2024 → Aujourd'hui</div>
-        <div class="tl-role">BUT Informatique — 2ᵉ année</div>
+        <div class="tl-role">BUT Informatique — 2ᵉ année en alternance</div>
         <div class="tl-org">IUT Nice Côte d'Azur, Valbonne (06) · Apprenti chez Thales</div>
         <ul class="tl-desc">
           <li>Développement web, bases de données &amp; SQL, POO avancée</li>
           <li>Architectures réseaux, systèmes d'information, dev mobile</li>
           <li>Cryptographie, probabilités, gestion de projet</li>
-        </ul>
-      </div>
-      <div class="tl-item reveal">
-        <div class="tl-dot"></div>
-        <div class="tl-date">2025 · 6 mois</div>
-        <div class="tl-role">Chef de projet — Jeu vidéo</div>
-        <div class="tl-org">Projet de 1ʳᵉ année · IUT Nice</div>
-        <ul class="tl-desc">
-          <li>Élaboration d'un jeu vidéo complet en équipe</li>
-          <li>Coordination et management d'une équipe de 7 personnes</li>
-          <li>Architecture logicielle et livraison du produit final</li>
         </ul>
       </div>
     </div>
@@ -363,7 +361,7 @@
             <div><div class="s-name">GitHub</div><div class="s-handle">@Tiretinium</div></div>
             <span class="s-arr">↗</span>
           </a>
-          <a href="https://www.linkedin.com/in/thomas-bandieras" target="_blank" class="social">
+          <a href="https://www.linkedin.com/in/thomas-bandieras-672772312/" target="_blank" class="social">
             <span class="ico">in</span>
             <div><div class="s-name">LinkedIn</div><div class="s-handle">Thomas Bandieras</div></div>
             <span class="s-arr">↗</span>
@@ -372,10 +370,9 @@
             <span class="ico">☎</span>
             <div><div class="s-name">Téléphone</div><div class="s-handle">07 69 48 35 25</div></div>
             <span class="s-arr">↗</span>
-          </a>
-          <a href="https://tiktok.com/@tiretnium2703" target="_blank" class="social">
-            <span class="ico">♪</span>
-            <div><div class="s-name">TikTok</div><div class="s-handle">@tiretnium2703</div></div>
+          </a>          <a href="https://www.instagram.com/thomas_bandieras____/?hl=fr" target="_blank" class="social">
+            <span class="ico">ig</span>
+            <div><div class="s-name">Instagram</div><div class="s-handle">thomas_bandieras___</div></div>
             <span class="s-arr">↗</span>
           </a>
         </div>
