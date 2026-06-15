@@ -1030,3 +1030,186 @@ footer {
   .term-body    { min-height: 280px; max-height: 420px; padding: 1rem; }
   .term-hint    { display: none; }
 }
+
+/* ============================================================
+   ALTERNANCE
+   ============================================================ */
+#alternance {
+  background: var(--paper-2);
+  border-top: var(--bw) solid var(--ink);
+  border-bottom: var(--bw) solid var(--ink);
+  padding: clamp(4rem, 8vw, 9rem) 0;
+}
+
+.alt-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 6rem);
+  align-items: start;
+  margin-top: 2.2rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.alt-intro {
+  font-size: clamp(.95rem, 1.3vw, 1.1rem);
+  line-height: 1.7;
+  color: var(--ink-soft);
+  padding-top: .4rem;
+}
+.alt-intro strong { color: var(--ink); }
+
+/* Context + skills grid */
+.alt-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+  border-top: var(--bw) solid var(--line);
+  padding-top: clamp(2rem, 4vw, 3.5rem);
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+/* Info blocks */
+.alt-context {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  border-right: var(--bw) solid var(--line);
+  padding-right: clamp(1rem, 3vw, 2.5rem);
+}
+
+.alt-info-block { display: flex; flex-direction: column; gap: .25rem; }
+
+.alt-info-label {
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.alt-info-val { font-size: 1rem; font-weight: 700; color: var(--ink); }
+
+.alt-info-sub { font-size: .82rem; color: var(--ink-soft); }
+
+/* Skill cards */
+.alt-skills {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.alt-skill-card {
+  border: var(--bw) solid var(--line);
+  padding: 1.4rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: .55rem;
+  transition: border-color .2s;
+}
+.alt-skill-card:hover { border-color: var(--red); }
+
+.alt-skill-ico { font-size: 1.25rem; color: var(--red); line-height: 1; }
+
+.alt-skill-name {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: .82rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.alt-skill-desc { font-size: .83rem; color: var(--ink-soft); line-height: 1.6; }
+
+
+/* Missions */
+.alt-missions {
+  border: var(--bw) solid var(--ink);
+}
+
+.alt-missions-kicker {
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--red);
+  padding: 1rem clamp(1.2rem, 3vw, 2rem);
+  border-bottom: var(--bw) solid var(--line);
+}
+
+.alt-mission {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  gap: 0;
+  border-bottom: var(--bw) solid var(--line);
+}
+.alt-mission:last-child { border-bottom: none; }
+
+.alt-mission-num {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: .8rem;
+  color: var(--red);
+  padding: clamp(1.2rem, 2.5vw, 1.8rem) 0 clamp(1.2rem, 2.5vw, 1.8rem) clamp(1.2rem, 3vw, 2rem);
+  border-right: var(--bw) solid var(--line);
+  display: flex;
+  align-items: flex-start;
+  padding-top: clamp(1.4rem, 2.5vw, 2rem);
+}
+
+.alt-mission-body {
+  padding: clamp(1.2rem, 2.5vw, 1.8rem) clamp(1.2rem, 3vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.alt-mission-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 125%;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  letter-spacing: -.02em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.alt-mission-title em { font-style: normal; color: var(--red); }
+
+.alt-mission-sub {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  color: var(--ink-soft);
+  letter-spacing: .05em;
+}
+
+.alt-mission-desc {
+  font-size: .88rem;
+  color: var(--ink-soft);
+  line-height: 1.68;
+  max-width: 70ch;
+  margin-top: .3rem;
+}
+.alt-mission-desc em { color: var(--red); font-style: normal; font-weight: 700; }
+
+.alt-mission-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin-top: .6rem;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .alt-head           { grid-template-columns: 1fr; }
+  .alt-grid           { grid-template-columns: 1fr; }
+  .alt-context        { border-right: none; border-bottom: var(--bw) solid var(--line); padding-right: 0; padding-bottom: 2rem; flex-direction: row; flex-wrap: wrap; gap: 1.5rem; }
+  .alt-info-block     { min-width: 140px; }
+}
+
+@media (max-width: 600px) {
+  .alt-skills         { grid-template-columns: 1fr; }
+  .alt-context        { flex-direction: column; }
+  .alt-mission        { grid-template-columns: 2.5rem 1fr; }
+}
