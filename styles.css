@@ -611,6 +611,7 @@ a.tag { cursor: pointer; }
   transition: .25s;
 }
 .tl-item:hover .tl-dot { background: var(--red); }
+.tl-dot--active { background: var(--red); box-shadow: 0 0 0 3px var(--paper), 0 0 0 5px var(--red); }
 .tl-date { font-family: var(--font-mono); font-size: .74rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--red); }
 .tl-role { font-family: var(--font-display); font-weight: 900; font-stretch: 110%; font-size: clamp(1.3rem, 2.6vw, 1.9rem); letter-spacing: -.01em; text-transform: uppercase; margin: .4rem 0 .25rem; }
 .tl-org { font-family: var(--font-mono); font-size: .82rem; color: var(--ink-soft); margin-bottom: 1rem; }
