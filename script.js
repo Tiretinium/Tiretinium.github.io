@@ -106,13 +106,11 @@ if (copyBtn) copyBtn.addEventListener('click', async () => {
   setTimeout(() => { copyBtn.textContent = 'Copier'; copyBtn.classList.remove('done'); }, 1800);
 });
 
-/* ---------- Formulaire (démo) ---------- */
+/* ---------- Formulaire contact ---------- */
 const sendBtn = document.getElementById('sendBtn');
 if (sendBtn) sendBtn.addEventListener('click', () => {
-  const form = document.getElementById('contactForm');
-  const confirm = document.getElementById('confirm');
-  form.style.display = 'none';
-  confirm.style.display = 'block';
+  document.getElementById('contactForm').style.display = 'none';
+  document.getElementById('confirm').style.display     = 'block';
 });
 
 /* ---------- Lightbox ---------- */
@@ -166,6 +164,49 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft')  { lbIdx = (lbIdx - 1 + lbImages.length) % lbImages.length; lbShow(); }
   if (e.key === 'ArrowRight') { lbIdx = (lbIdx + 1) % lbImages.length; lbShow(); }
 });
+
+/* ---------- Notation par étoiles + formulaire avis ---------- */
+(function () {
+  const starsRow    = document.getElementById('starsRow');
+  const starCaption = document.getElementById('starCaption');
+  const avisForm    = document.getElementById('avisForm');
+  const avisConfirm = document.getElementById('avisConfirm');
+  if (!starsRow) return;
+
+  const labels = ['', 'Mauvais', 'Pas terrible', 'Correct', 'Bien', 'Excellent !'];
+  let selected = 0;
+  const stars  = Array.from(starsRow.querySelectorAll('.star-btn'));
+
+  function paint(n) {
+    stars.forEach((s, i) => s.classList.toggle('lit', i < n));
+  }
+
+  starsRow.addEventListener('mouseover', e => {
+    const btn = e.target.closest('.star-btn');
+    if (btn) paint(+btn.dataset.val);
+  });
+  starsRow.addEventListener('mouseout', () => paint(selected));
+  starsRow.addEventListener('click', e => {
+    const btn = e.target.closest('.star-btn');
+    if (!btn) return;
+    selected = +btn.dataset.val;
+    paint(selected);
+    starCaption.textContent = '★'.repeat(selected) + '  ' + labels[selected];
+    starCaption.classList.remove('err');
+  });
+
+  avisForm.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!selected) {
+      starCaption.textContent = 'Donne une note d\'abord !';
+      starCaption.classList.add('err');
+      return;
+    }
+
+    avisForm.style.display    = 'none';
+    avisConfirm.style.display = 'block';
+  });
+})();
 
 /* ---------- CV iframe fallback ---------- */
 const cvIframe = document.querySelector('.cv-iframe');

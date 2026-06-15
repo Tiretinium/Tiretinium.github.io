@@ -1214,3 +1214,65 @@ footer {
   .alt-context        { flex-direction: column; }
   .alt-mission        { grid-template-columns: 2.5rem 1fr; }
 }
+
+/* ============================================================
+   AVIS / NOTATION
+   ============================================================ */
+#avis {
+  background: var(--paper);
+  border-top: var(--bw) solid var(--ink);
+  border-bottom: var(--bw) solid var(--ink);
+}
+
+.avis-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+  margin-top: 3rem;
+}
+
+.avis-lead {
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  max-width: 38ch;
+  margin-bottom: 2.5rem;
+}
+
+.stars-row {
+  display: flex;
+  gap: .2rem;
+  margin-bottom: 1.1rem;
+}
+
+.star-btn {
+  font-size: clamp(2.4rem, 5.5vw, 3.4rem);
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 .15rem;
+  line-height: 1;
+  transition: color .12s, transform .12s;
+  user-select: none;
+}
+
+.star-btn.lit  { color: var(--red); }
+.star-btn:hover { transform: scale(1.18); }
+
+.star-caption {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--red);
+  min-height: 1.4em;
+  transition: color .2s;
+}
+.star-caption.err { color: #f85149; }
+
+@media (max-width: 860px) {
+  .avis-grid { grid-template-columns: 1fr; }
+}
