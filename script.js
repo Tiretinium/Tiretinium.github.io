@@ -184,49 +184,6 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') { lbIdx = (lbIdx + 1) % lbImages.length; lbShow(); }
 });
 
-/* ---------- Notation par étoiles + formulaire avis ---------- */
-(function () {
-  const starsRow    = document.getElementById('starsRow');
-  const starCaption = document.getElementById('starCaption');
-  const avisForm    = document.getElementById('avisForm');
-  const avisConfirm = document.getElementById('avisConfirm');
-  if (!starsRow) return;
-
-  const labels = ['', 'Mauvais', 'Pas terrible', 'Correct', 'Bien', 'Excellent !'];
-  let selected = 0;
-  const stars  = Array.from(starsRow.querySelectorAll('.star-btn'));
-
-  function paint(n) {
-    stars.forEach((s, i) => s.classList.toggle('lit', i < n));
-  }
-
-  starsRow.addEventListener('mouseover', e => {
-    const btn = e.target.closest('.star-btn');
-    if (btn) paint(+btn.dataset.val);
-  });
-  starsRow.addEventListener('mouseout', () => paint(selected));
-  starsRow.addEventListener('click', e => {
-    const btn = e.target.closest('.star-btn');
-    if (!btn) return;
-    selected = +btn.dataset.val;
-    paint(selected);
-    starCaption.textContent = '★'.repeat(selected) + '  ' + labels[selected];
-    starCaption.classList.remove('err');
-  });
-
-  avisForm.addEventListener('submit', e => {
-    e.preventDefault();
-    if (!selected) {
-      starCaption.textContent = 'Donne une note d\'abord !';
-      starCaption.classList.add('err');
-      return;
-    }
-
-    avisForm.style.display    = 'none';
-    avisConfirm.style.display = 'block';
-  });
-})();
-
 /* ---------- CV iframe fallback ---------- */
 const cvIframe = document.querySelector('.cv-iframe');
 const cvPreview = document.querySelector('.cv-preview');
