@@ -107,10 +107,29 @@ if (copyBtn) copyBtn.addEventListener('click', async () => {
 });
 
 /* ---------- Formulaire contact ---------- */
-const sendBtn = document.getElementById('sendBtn');
-if (sendBtn) sendBtn.addEventListener('click', () => {
-  document.getElementById('contactForm').style.display = 'none';
-  document.getElementById('confirm').style.display     = 'block';
+const contactForm = document.getElementById('contactForm');
+if (contactForm) contactForm.addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = document.getElementById('sendBtn');
+  btn.textContent = 'Envoi en cours…';
+  btn.disabled = true;
+  try {
+    const res = await fetch('https://formspree.io/f/mjgdngll', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(contactForm)
+    });
+    if (res.ok) {
+      contactForm.style.display = 'none';
+      document.getElementById('confirm').style.display = 'block';
+    } else {
+      btn.textContent = 'Erreur — réessaie';
+      btn.disabled = false;
+    }
+  } catch {
+    btn.textContent = 'Erreur — réessaie';
+    btn.disabled = false;
+  }
 });
 
 /* ---------- Lightbox ---------- */

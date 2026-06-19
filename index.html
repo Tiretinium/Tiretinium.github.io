@@ -662,17 +662,17 @@
         <form class="form" id="contactForm">
           <div class="field">
             <label for="cName">Nom</label>
-            <input type="text" id="cName" placeholder="Comment tu t'appelles ?">
+            <input type="text" id="cName" name="name" placeholder="Comment tu t'appelles ?">
           </div>
           <div class="field">
             <label for="cEmail">Email</label>
-            <input type="email" id="cEmail" placeholder="ton@email.com">
+            <input type="email" id="cEmail" name="email" placeholder="ton@email.com">
           </div>
           <div class="field">
             <label for="cMsg">Message</label>
-            <textarea id="cMsg" placeholder="Dis-moi tout…"></textarea>
+            <textarea id="cMsg" name="message" placeholder="Dis-moi tout…"></textarea>
           </div>
-          <button type="button" class="send" id="sendBtn">Envoyer le message →</button>
+          <button type="submit" class="send" id="sendBtn">Envoyer le message →</button>
         </form>
         <div class="confirm" id="confirm">✓ Message reçu — je te réponds vite !</div>
       </div>
