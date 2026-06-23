@@ -174,7 +174,7 @@
     <div class="proj-list">
 
       <!-- 01 -->
-      <article class="proj reveal">
+      <article class="proj reveal" data-proj-id="1">
         <div class="proj-visual">
           <div class="shots">
             <img src="imageAmettredanslehtml/AppMobile1.png" alt="App Mobile screen 1">
@@ -195,7 +195,7 @@
       </article>
 
       <!-- 02 -->
-      <article class="proj reveal">
+      <article class="proj reveal" data-proj-id="2">
         <div class="proj-visual">
           <div class="shots">
             <img src="imageAmettredanslehtml/PokeBattle1.png" alt="Pokémon Battle screen 1">
@@ -217,7 +217,7 @@
       </article>
 
       <!-- 03 -->
-      <article class="proj reveal">
+      <article class="proj reveal" data-proj-id="3">
         <div class="proj-visual">
           <div class="shots">
             <img src="imageAmettredanslehtml/EscapeCube1.png" alt="Escape Cube screen 1">
@@ -238,7 +238,7 @@
       </article>
 
       <!-- 04 -->
-      <article class="proj reveal">
+      <article class="proj reveal" data-proj-id="4">
         <div class="proj-visual">
           <div class="shots">
             <img src="imageAmettredanslehtml/AeroportTycon1.png" alt="Aéroport Tycoon screen 1">
@@ -668,6 +668,25 @@
     <span>Nice — Côte d'Azur, FR</span>
   </div>
 </footer>
+
+<!-- MODAL PROJET -->
+<div id="projModal" class="pm-overlay" role="dialog" aria-modal="true">
+  <div class="pm">
+    <div class="pm-left">
+      <img class="pm-main-shot" id="pmMainShot" src="" alt="">
+      <div class="pm-thumbs" id="pmThumbs"></div>
+    </div>
+    <div class="pm-right">
+      <button class="pm-close" id="pmClose" aria-label="Fermer">✕</button>
+      <div class="pm-num" id="pmNum"></div>
+      <h3 class="pm-title" id="pmTitle"></h3>
+      <p class="pm-desc" id="pmDesc"></p>
+      <ul class="pm-features" id="pmFeatures"></ul>
+      <div class="pm-tech" id="pmTech"></div>
+      <a class="proj-go pm-go" id="pmGo" href="#" target="_blank" rel="noopener">Voir sur GitHub ↗</a>
+    </div>
+  </div>
+</div>
 
 <!-- LIGHTBOX -->
 <div class="lb" id="lb" role="dialog" aria-modal="true">

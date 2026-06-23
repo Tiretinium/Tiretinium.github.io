@@ -184,6 +184,127 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') { lbIdx = (lbIdx + 1) % lbImages.length; lbShow(); }
 });
 
+/* ---------- Modal projet ---------- */
+const PROJECTS = {
+  '1': {
+    num: '01',
+    title: 'Application <em>Mobile</em>',
+    desc: 'Application mobile full-stack développée avec Vue 3 et TypeScript. L\'interface s\'articule autour d\'une navigation multi-écrans fluide, une gestion d\'état réactive et une communication complète avec une API REST pour la persistance des données.',
+    features: [
+      'Navigation multi-écrans avec Vue Router',
+      'Typage strict TypeScript end-to-end',
+      'Intégration et consommation d\'une API REST',
+      'Interface mobile-first et responsive',
+    ],
+    tech: '<span class="chip"><img src="https://cdn.simpleicons.org/vuedotjs/121212" alt="">Vue 3</span><span class="chip"><img src="https://cdn.simpleicons.org/typescript/121212" alt="">TypeScript</span><span class="chip">API REST</span>',
+    github: 'https://github.com/Tiretinium/appmobile',
+    shots: ['imageAmettredanslehtml/AppMobile1.png', 'imageAmettredanslehtml/AppMobile2.png'],
+  },
+  '2': {
+    num: '02',
+    title: 'Pokémon<em> Battle</em>',
+    desc: 'Application web complète autour de l\'univers Pokémon. Le backend expose une API REST construite avec Spring Boot, connectée à une base MySQL. Le frontend React permet de s\'authentifier, explorer les Pokémon et lancer des combats interactifs au tour par tour.',
+    features: [
+      'API REST Spring Boot avec base de données MySQL',
+      'Authentification utilisateur (login / register)',
+      'Système de combat au tour par tour',
+      'Frontend React avec routing et gestion d\'état',
+    ],
+    tech: '<span class="chip"><img src="https://cdn.simpleicons.org/springboot/121212" alt="">Spring Boot</span><span class="chip"><img src="https://cdn.simpleicons.org/react/121212" alt="">React</span><span class="chip"><img src="https://cdn.simpleicons.org/mysql/121212" alt="">MySQL</span><span class="chip">REST API</span>',
+    github: 'https://github.com/Tiretinium/Pokeapp-Frontend',
+    shots: ['imageAmettredanslehtml/PokeBattle1.png', 'imageAmettredanslehtml/PokeBattle2.png'],
+  },
+  '3': {
+    num: '03',
+    title: 'Escape <em>Cube 2</em>',
+    desc: 'Jeu d\'escape en ligne jouable directement dans le navigateur. L\'architecture client-serveur repose sur Node.js, avec une logique de donjon implémentée côté serveur en JavaScript et une interface HTML/CSS rendue dynamiquement côté client.',
+    features: [
+      'Architecture client-serveur Node.js',
+      'Donjon interactif avec navigation en temps réel',
+      'Logique de jeu JavaScript côté serveur',
+      'Interface HTML/CSS rendue dynamiquement',
+    ],
+    tech: '<span class="chip"><img src="https://cdn.simpleicons.org/javascript/121212" alt="">JavaScript</span><span class="chip"><img src="https://cdn.simpleicons.org/nodedotjs/121212" alt="">Node.js</span><span class="chip"><img src="https://cdn.simpleicons.org/html5/121212" alt="">HTML/CSS</span>',
+    github: 'https://github.com/Tiretinium/EscapeCube2',
+    shots: ['imageAmettredanslehtml/EscapeCube1.png', 'imageAmettredanslehtml/EscapeCube2.png'],
+  },
+  '4': {
+    num: '04',
+    title: 'Aéroport <em>Tycoon</em>',
+    desc: 'Jeu de gestion d\'aéroport en React et TypeScript, bundlé avec Vite. Le joueur construit des infrastructures, gère les flux de passagers et optimise ses ressources en temps réel dans une simulation entièrement graphique.',
+    features: [
+      'Simulation de gestion en temps réel',
+      'Construction et upgrade d\'infrastructures',
+      'Flux de passagers dynamiques',
+      'Codebase React + TypeScript entièrement typée',
+    ],
+    tech: '<span class="chip"><img src="https://cdn.simpleicons.org/react/121212" alt="">React</span><span class="chip"><img src="https://cdn.simpleicons.org/typescript/121212" alt="">TypeScript</span><span class="chip"><img src="https://cdn.simpleicons.org/vite/121212" alt="">Vite</span>',
+    github: 'https://github.com/Tiretinium/A-roportTycon',
+    shots: ['imageAmettredanslehtml/AeroportTycon1.png', 'imageAmettredanslehtml/AeroportTycon2.png'],
+  },
+};
+
+const projModal = document.getElementById('projModal');
+const pmClose   = document.getElementById('pmClose');
+const pmNum     = document.getElementById('pmNum');
+const pmTitle   = document.getElementById('pmTitle');
+const pmDesc    = document.getElementById('pmDesc');
+const pmFeats   = document.getElementById('pmFeatures');
+const pmTech    = document.getElementById('pmTech');
+const pmGo      = document.getElementById('pmGo');
+const pmMain    = document.getElementById('pmMainShot');
+const pmThumbs  = document.getElementById('pmThumbs');
+
+function openProjModal(id) {
+  const p = PROJECTS[id];
+  if (!p) return;
+  pmNum.textContent  = p.num;
+  pmTitle.innerHTML  = p.title;
+  pmDesc.textContent = p.desc;
+  pmFeats.innerHTML  = p.features.map(f => `<li>${f}</li>`).join('');
+  pmTech.innerHTML   = p.tech;
+  pmGo.href          = p.github;
+  pmMain.src         = p.shots[0];
+  pmMain.alt         = p.title.replace(/<[^>]+>/g, '') + ' screenshot 1';
+  pmThumbs.innerHTML = '';
+  p.shots.forEach((src, i) => {
+    const div = document.createElement('div');
+    div.className = 'pm-thumb' + (i === 0 ? ' active' : '');
+    const img = document.createElement('img');
+    img.src = src; img.alt = 'Screenshot ' + (i + 1);
+    div.appendChild(img);
+    div.addEventListener('click', () => {
+      pmMain.src = src;
+      pmThumbs.querySelectorAll('.pm-thumb').forEach(t => t.classList.remove('active'));
+      div.classList.add('active');
+    });
+    pmThumbs.appendChild(div);
+  });
+  projModal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeProjModal() {
+  projModal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+pmClose.addEventListener('click', closeProjModal);
+projModal.addEventListener('click', e => { if (e.target === projModal) closeProjModal(); });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && projModal.classList.contains('open')) closeProjModal();
+});
+
+document.querySelectorAll('.proj[data-proj-id]').forEach(card => {
+  const id  = card.dataset.projId;
+  const go  = card.querySelector('.proj-go');
+  const btn = document.createElement('button');
+  btn.className   = 'proj-more';
+  btn.textContent = 'En savoir plus →';
+  btn.addEventListener('click', e => { e.stopPropagation(); openProjModal(id); });
+  go.parentNode.insertBefore(btn, go);
+});
+
 /* ---------- CV iframe fallback ---------- */
 const cvIframe = document.querySelector('.cv-iframe');
 const cvPreview = document.querySelector('.cv-preview');
